@@ -1,3 +1,5 @@
+import { CardsService } from "./CardsServices";
+
 export class CardController{
     static async getAllCards(req,res){
 
@@ -12,6 +14,15 @@ export class CardController{
     }
 
     static async addCard(req,res){
+        const card = {
+            ...req.body,
+            
+        }
+        try {
+            const newCard=await CardsService.addCard(req.body)
+        } catch (error) {
+            
+        }
 
     }
 

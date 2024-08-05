@@ -2,12 +2,15 @@ import express from 'express'
 import mongoose from 'mongoose';
 import cors from 'cors'
 
+async function main(){
+    await mongoose.connect(`mongodb://127.0.0.1:27017/backend-project`)
+    console.log(`mongo connected on port 27017`);
+    
+}
+
+main().catch(err=>console.log(err))
 
 const app = express()
-
-/* async function main(){
-    await mongoose.connect(`mongodb://127.0.0.1:27017`)
-} */
 
 app.use(express.json())
 
