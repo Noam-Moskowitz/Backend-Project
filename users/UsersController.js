@@ -6,8 +6,9 @@ export class UserController{
             ...req.body,
             isAdmin:false,
             createdAt:new Date(),
-            password:await bcrypt.hash(req.body.password, 10,(error)=>console.log(error))
+            password: await bcrypt.hash(req.body.password, 10)
         }
+
         try {
             const newUser=await UserServices.addUser(user)
             

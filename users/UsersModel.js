@@ -8,11 +8,7 @@ const nameShcmea=new Schema({
         minLength:1,
         maxLength:25
     },
-    middle:{
-        type:String,
-        minLength:1,
-        maxLength:25
-    },
+    middle:String,
     last:{
         type:String,
         required:true,
@@ -27,12 +23,7 @@ const imageSchema=new Schema({
 })
 
 const addressSchema=new Schema({
-    state:{
-        type:String,
-        minLength:1,
-        maxLength:30,
-        default:'not defined'
-    },
+    state:String,
     country:{
         type:String,
         required:true,
@@ -82,7 +73,6 @@ const userSchema= new Schema({
         type:String,
         required:true,
         minLength:7,
-        maxLength:35
     },
     image:imageSchema,
     address:addressSchema,
