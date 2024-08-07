@@ -1,4 +1,4 @@
-import { CardsService } from "./CardsServices";
+import { CardsService } from "./CardsServices.js";
 
 export class CardController{
     static async getAllCards(req,res){

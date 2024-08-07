@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose';
 import cors from 'cors'
+import appRoutes from './routers/mainRouter.js'
 
 async function main(){
     await mongoose.connect(`mongodb://127.0.0.1:27017/backend-project`)
@@ -24,6 +25,7 @@ app.use(cors({
 app.listen(`4040`, () => {
     console.log(`listeing on port 4040`);
 })
+app.use(`/`,appRoutes)
 
 app.get(`/`, (req, res) => {
     res.send(`welcome`)

@@ -1,6 +1,6 @@
 import express from 'express'
-import { validateCard } from '../middleware/cardsMiddleware'
-import { CardController } from '../controllers/CardsController'
+import { validateCard } from '../cards/cardsMiddleware.js'
+import { CardController } from '../cards/CardsController.js'
 
 const router = express.Router()
 

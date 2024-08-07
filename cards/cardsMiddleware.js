@@ -1,4 +1,4 @@
-import { cardValidationSchema } from "../models/CardsModel";
+import { cardValidationSchema } from "../cards/CardsModel.js";
 
 export const validateCard=(req,res,next)=>{
     const card = req.body;

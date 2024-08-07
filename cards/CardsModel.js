@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { Schema } from "mongoose";
+import { Schema , model} from "mongoose";
 
 const imageSchema = new Schema({
     url: {
@@ -100,7 +100,7 @@ const cardSchema = new Schema({
     }
 })
 
-export const CardModel=new model(`cards`,cardSchema);
+export const CardModel= new model(`cards`,cardSchema);
 
  const cardImageValidationSchema = Joi.object({
     url:Joi.string().uri().min(7),

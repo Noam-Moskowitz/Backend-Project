@@ -1,4 +1,4 @@
-import { CardModel } from "../models/CardsModel";
+import { CardModel } from "../cards/CardsModel.js";
 
 export class CardsService{
     static async addCard(card){
