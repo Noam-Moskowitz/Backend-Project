@@ -94,14 +94,22 @@ const userSchema= new Schema({
 
 export const UserModel=new model(`users`, userSchema);
 
-const userImageValidation=Joi.object({
+const nameValidation=Joi.object({
     first:Joi.string().min(1).max(25).required(),
-    middle:Joi.string().min(1).max(25),
+    middle:Joi.string().min(0),
     last:Joi.string().min(1).max(25).required(),
 })
 
+const urlRegex = /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,})?(\/[^\s]*)?$/
+
+const userImageValidation=Joi.object({
+    url:Joi.string().min(0).pattern(urlRegex),
+    alt:Joi.string().min(0)
+})
+
+
 const userAddressValidation=Joi.object({
-    state:Joi.string().min(1).max(30),
+    state:Joi.string().min(0).max(30),
     country:Joi.string().min(1).max(30).required(),
     city:Joi.string().min(1).max(30).required(),
     street:Joi.string().min(1).max(30).required(),
@@ -112,7 +120,7 @@ const userAddressValidation=Joi.object({
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,35}$/;
 
 export const userValidation=Joi.object({
-    name:userImageValidation,
+    name:nameValidation,
     phone:Joi.string().min(7).max(13).required(),
     email:Joi.string().email().min(5).max(25).required(),
     password:Joi.string().regex(passwordRegex),

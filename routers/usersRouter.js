@@ -1,20 +1,22 @@
 import express from 'express'
 import { UserController } from '../users/UsersController.js'
+import { checkCredentials, checkIsAdmin, checkIsUserOrAdmin, validateUser } from '../users/usersMiddleware.js'
 
 const router = express.Router()
 
-router.get(`/`)
+router.get(`/`,checkIsAdmin, UserController.getAllUsers)
 
-router.get(`/:id`)
+router.get(`/:id`, checkIsUserOrAdmin, UserController.getUserById)
 
-router.post(`/`, UserController.addUser)
+router.post(`/`,validateUser, UserController.addUser)
 
-router.post(`/login`)
+router.put(`/:id`,checkIsUserOrAdmin, validateUser, UserController.updateUser)
 
-router.put(`/:id`)
+router.patch(`/:id`,checkIsUserOrAdmin, UserController.changeBusinessStatus)
 
-router.patch(`/:id`)
+router.delete(`/:id`,checkIsUserOrAdmin, UserController.deleteUser)
 
-router.delete(`/:id`)
+router.post(`/login`,checkCredentials, UserController.loginUser)
+
 
 export default router
