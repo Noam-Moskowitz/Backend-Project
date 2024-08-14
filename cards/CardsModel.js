@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { Schema , model} from "mongoose";
+import { Schema , SchemaType, model} from "mongoose";
 
 const imageSchema = new Schema({
     url: {
@@ -91,7 +91,7 @@ const cardSchema = new Schema({
         required:true
     },
     user_id:{
-        type:String,
+        type:Schema.Types.ObjectId,
         required:true,
     },
     createdAt:{

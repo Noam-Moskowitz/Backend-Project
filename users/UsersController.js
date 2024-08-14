@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { UserServices } from './UsersServices.js'
+import { generateBizNumber } from '../utils/userUtils.js'
 export class UserController{
     static async getAllUsers(req,res){
         try {
@@ -28,7 +29,8 @@ export class UserController{
             ...req.body,
             isAdmin:false,
             createdAt:new Date(),
-            password: await bcrypt.hash(req.body.password, 10)
+            password: await bcrypt.hash(req.body.password, 10),
+            bizNumber:req.body.isBusiness?generateBizNumber() :``
         }
 
         try {
@@ -45,6 +47,9 @@ export class UserController{
         const newUser=req.body;
         try {
             const updatedUser = await UserServices.updateUser(id, newUser)
+            if (!updatedUser) {
+                return res.status(401).send({message:`cant find user with ${id}`})
+            }
 
             res.send(updatedUser)
         } catch (error) {
@@ -86,6 +91,7 @@ export class UserController{
                 last:user.name.last,
                 isBusiness:user.isBusiness,
                 isAdmin:user.isAdmin,
+                bizNumber:user.bizNumber||``
             }, process.env.JWT_SECRET, {expiresIn:`1hr`})
 
 

@@ -86,6 +86,11 @@ const userSchema= new Schema({
         default:false,
         required:true
     },
+    bizNumber:{
+        type:String,
+        minLength:0,
+        maxLength:7
+    },
     createdAt:{
         type:String,
         required:true

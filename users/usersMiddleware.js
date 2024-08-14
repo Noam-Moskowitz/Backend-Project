@@ -65,6 +65,25 @@ export const checkIsUserOrAdmin= async (req,res,next)=>{
     }
 }
 
+export const validateToken=(req,res,next)=>{
+    const user=decodeToken(req.headers.authorization)
+    if (!user) {        
+        return res.status(401).send({message:`User is not authorized`})
+    }
+
+    const dateToCompare = new Date(user.exp * 1000);
+
+    const newDate = new Date(); 
+
+    const isExpired = newDate > dateToCompare;
+
+    if (isExpired) {
+        return res.status(401).send({message:`User is not authorized`})
+    }
+    next()
+    
+}
+
 
 const decodeToken=(token)=>{
     const decodedToken= jwt.decode(token, process.env.JWT_SECRET)
@@ -84,6 +103,20 @@ export const validateUser= async(req,res,next)=>{
     if (existingEmail) {
         return res.status(403).send({message:`email already in use!`})
     }
+
+    if (error) {
+        return res.status(403).send({message:error})
+    }
+
+    
+    next()
+    
+}
+
+export const validateUpdatedUser= async(req,res,next)=>{
+    const {error}=userValidation.validate(req.body)
+
+
 
     if (error) {
         return res.status(403).send({message:error})

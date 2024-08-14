@@ -1,6 +1,6 @@
 import express from 'express'
 import { UserController } from '../users/UsersController.js'
-import { checkCredentials, checkIsAdmin, checkIsUserOrAdmin, validateUser } from '../users/usersMiddleware.js'
+import { checkCredentials, checkIsAdmin, checkIsUserOrAdmin, validateToken, validateUpdatedUser, validateUser } from '../users/usersMiddleware.js'
 
 const router = express.Router()
 
@@ -10,7 +10,7 @@ router.get(`/:id`, checkIsUserOrAdmin, UserController.getUserById)
 
 router.post(`/`,validateUser, UserController.addUser)
 
-router.put(`/:id`,checkIsUserOrAdmin, validateUser, UserController.updateUser)
+router.put(`/:id`,validateToken,checkIsUserOrAdmin, validateUpdatedUser, UserController.updateUser)
 
 router.patch(`/:id`,checkIsUserOrAdmin, UserController.changeBusinessStatus)
 

@@ -1,3 +1,4 @@
+import { generateBizNumber } from "../utils/userUtils.js";
 import { UserModel } from "./UsersModel.js";
 
 
@@ -45,6 +46,9 @@ export class UserServices{
     static async changeUserBusinessStatus(id){
         try {
             const user=await UserModel.findById(id)
+            if (!user.isBusiness && !user.bizNumber) {
+                user.bizNumber=generateBizNumber()
+            }
 
             user.isBusiness=!user.isBusiness
 
