@@ -30,6 +30,7 @@ export class CardsService{
             return error
         }
     }
+
     static async addCard(card){
         try {
             const newCard=await CardModel.create(card)
@@ -38,5 +39,54 @@ export class CardsService{
         } catch (error) {
             return error
         } 
+    }
+
+    static async updateCard(cardId,card){
+        try {
+            const updatedCard=await CardModel.findByIdAndUpdate(cardId, card, {new:true})
+        
+            return updatedCard  
+        } catch (error) {
+            return error
+        } 
+    }
+
+    static async likeCard(cardId, userId){
+        try {
+            const card=await CardModel.findById(cardId)
+
+        if (!card) {
+            return null
+        }
+
+        const cardIsLiked=card.likes.includes(userId)
+        let likesArray;
+
+        if (cardIsLiked) {
+            likesArray=card.likes.filter(user=>user!==userId)
+        }else{
+            likesArray=[...card.likes, userId]
+        }
+
+        card.likes=likesArray;
+
+        const newCard=await CardModel.findByIdAndUpdate(cardId, card);
+        
+        return newCard
+
+        } catch (error) {
+            return error
+        }
+        
+    }
+
+    static async deleteCard(cardId){
+        try {
+            const deletedCard=await CardModel.findByIdAndDelete(cardId);
+
+            return deletedCard
+        } catch (error) {
+            throw error
+        }
     }
 }

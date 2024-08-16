@@ -57,15 +57,50 @@ export class CardController{
     }
 
     static async updateCard(req,res){
+        const {id}=req.params;
 
-    }
+        try {
+            const updatedCard=await CardsService.updateCard(id,req.body)
 
-    static async deleteCard(req,res){
-
+            res.send(updatedCard)
+        } catch (error) {
+            res.status(404).send({message:error})
+        }
     }
 
     static async likeCard(req,res){
+        const {id}=req.params
+        const user=jwt.decode(req.headers.authorization)
 
+        try {
+            const newCard=await CardsService.likeCard(id, user._id)
+
+            if (!newCard) {
+                return res.status(404).send({message:`card does not exist`})
+            }
+
+            res.send(newCard) 
+        } catch (error) {
+            res.status(404).send({message:error})
+        }
     }
+
+    static async deleteCard(req,res){
+        const {id}=req.params
+
+        try {
+            const deletedCard=await CardsService.deleteCard(id)
+
+            if (!deletedCard) {
+                return res.status(404).send({message:`card does not exist`})
+            }
+
+            res.send(deletedCard);
+        } catch (error) {
+            res.status(404).send({message:error})
+        }
+    }
+
+    
 
 }

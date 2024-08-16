@@ -53,8 +53,12 @@ export const checkIsUserOrAdmin= async (req,res,next)=>{
     if (!token) {
         res.status(401).send({message:`User is not authorized`})
     }
-
+ 
     const user=decodeToken(token)
+
+    if (user._id==null) {
+        res.status(401).send({message:`User is not authorized`})
+    }
     
     const existingUser= await UserModel.findById(user._id)
 

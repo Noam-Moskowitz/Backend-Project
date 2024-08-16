@@ -1,7 +1,7 @@
 import express from 'express'
 import { validateCard } from '../cards/cardsMiddleware.js'
 import { CardController } from '../cards/CardsController.js'
-import { checkIsBusinessOrAdmin } from '../users/usersMiddleware.js'
+import { checkIsBusinessOrAdmin, checkIsUserOrAdmin, validateToken } from '../users/usersMiddleware.js'
 
 const router = express.Router()
 
@@ -11,12 +11,12 @@ router.get(`/my-cards`,CardController.getCardsByUser)
 
 router.get(`/:id`, CardController.getCardById)
 
-router.post(`/`,checkIsBusinessOrAdmin,validateCard, CardController.addCard)
+router.post(`/` ,validateToken,checkIsBusinessOrAdmin,validateCard, CardController.addCard)
 
-router.put(`/:id`,validateCard, CardController.updateCard)
+router.put(`/:id`,validateToken,checkIsUserOrAdmin,validateCard, CardController.updateCard)
 
-router.patch(`/:id`, CardController.likeCard)
+router.patch(`/:id`,validateToken,checkIsBusinessOrAdmin, CardController.likeCard)
 
-router.delete(`/:id`,CardController.deleteCard)
+router.delete(`/:id`,validateToken,checkIsUserOrAdmin,CardController.deleteCard) 
 
 export default router

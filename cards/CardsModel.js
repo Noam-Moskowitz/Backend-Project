@@ -84,7 +84,7 @@ const cardSchema = new Schema({
     bizNumber:{
         type:Number,
         required:true,
-        min:1
+        min:7,
     },
     likes:{
         type:[String],
@@ -124,6 +124,6 @@ export const cardValidationSchema=Joi.object({
     email:Joi.string().email().min(6).required(),
     web:Joi.string().uri().min(7).required(),
     image: cardImageValidationSchema,
-    address:cardAddressValidationSchema
+    address:cardAddressValidationSchema,
 })
 
