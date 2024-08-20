@@ -9,7 +9,7 @@ export class UserServices{
 
             return allUsers
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -19,7 +19,7 @@ export class UserServices{
 
             return user
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -29,7 +29,7 @@ export class UserServices{
             
             return newUser
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -39,7 +39,7 @@ export class UserServices{
             
             return updatedUser
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -56,7 +56,7 @@ export class UserServices{
             
             return updatedUser
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -66,13 +66,13 @@ export class UserServices{
 
             return deletedUser
         } catch (error) {
-            return error
+            throw error
         }
     }
 
     static async loginUser(credentials){
 
-        const {email, password}=credentials
+        const {email}=credentials
         
         try {
             const user= await UserModel.findOne({email:email})              
@@ -81,7 +81,7 @@ export class UserServices{
 
         } catch (error) {
             
-            return error
+            throw error
         }
     }
 }

@@ -19,7 +19,7 @@ export const checkIsBusinessOrAdmin= async (req,res,next)=>{
     const token =req.headers.authorization
 
     if (!token) {
-        res.status(401).send({message:`User is not authorized`})
+       return res.status(401).send({message:`User is not authorized`})
     }
 
     const user=decodeToken(token)
@@ -34,7 +34,7 @@ export const checkIsAdmin= async (req,res,next)=>{
     const token =req.headers.authorization
 
     if (!token) {
-        res.status(401).send({message:`User is not authorized`})
+       return res.status(401).send({message:`User is not authorized`})
     }
 
     const user=decodeToken(token)
@@ -51,15 +51,11 @@ export const checkIsUserOrAdmin= async (req,res,next)=>{
     const token =req.headers.authorization
 
     if (!token) {
-        res.status(401).send({message:`User is not authorized`})
+       return res.status(401).send({message:`User is not authorized`})
     }
  
     const user=decodeToken(token)
 
-    if (user._id==null) {
-        res.status(401).send({message:`User is not authorized`})
-    }
-    
     const existingUser= await UserModel.findById(user._id)
 
     if (existingUser||user.isAdmin){
@@ -92,7 +88,7 @@ export const validateToken=(req,res,next)=>{
 const decodeToken=(token)=>{
     const decodedToken= jwt.decode(token, process.env.JWT_SECRET)
 
-    if (!decodeToken) {
+    if (!decodedToken) {
         return null
     }
 
@@ -120,13 +116,10 @@ export const validateUser= async(req,res,next)=>{
 export const validateUpdatedUser= async(req,res,next)=>{
     const {error}=userValidation.validate(req.body)
 
-
-
     if (error) {
         return res.status(403).send({message:error})
     }
 
-    
     next()
     
 }

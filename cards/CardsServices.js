@@ -7,7 +7,7 @@ export class CardsService{
 
             return allCards
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -17,7 +17,7 @@ export class CardsService{
 
             return usersCards
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -27,7 +27,7 @@ export class CardsService{
 
             return card
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -37,7 +37,7 @@ export class CardsService{
         
             return newCard  
         } catch (error) {
-            return error
+            throw error
         } 
     }
 
@@ -47,7 +47,7 @@ export class CardsService{
         
             return updatedCard  
         } catch (error) {
-            return error
+            throw error
         } 
     }
 
@@ -75,7 +75,7 @@ export class CardsService{
         return newCard
 
         } catch (error) {
-            return error
+            throw error
         }
         
     }

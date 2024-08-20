@@ -4,6 +4,10 @@ import cors from 'cors'
 import appRoutes from './routers/mainRouter.js'
 import dotenv from 'dotenv'
 import morgan from 'morgan';
+import chalk from 'chalk';
+import moment from 'moment';
+import { colorMethod } from './utils/chalkUtils.js';
+
 
 dotenv.config()
 
@@ -21,7 +25,17 @@ const app = express()
 
 app.use(express.json())
 
-app.use(morgan(`:method :url :status :date[iso] :response-time ms`))
+app.use(morgan((tokens, req, res) => {
+    const status = tokens.status(req, res);
+
+    return [
+        colorMethod(tokens.method(req, res)),
+        chalk.green(tokens.url(req, res)),
+        status >= 200 && status < 400 ? chalk.bgGreen(tokens.status(req, res)) : chalk.bgRed(tokens.status(req, res)),
+        chalk.gray(moment().format("YYYY-MM-DD HH:mm")),
+        chalk.bgBlack(tokens['response-time'](req, res), 'ms'),
+    ].join(' ')
+}));
 
 
 app.use(cors({
