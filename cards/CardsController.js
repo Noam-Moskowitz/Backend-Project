@@ -28,7 +28,11 @@ export class CardController{
         const {id}=req.params;
         
         try {
-            const card=await CardsService.getCardById(id)
+            const card=await CardsService.getCardById(id);
+
+            if (!card){
+                return res.status(404).send({message:`card not found!`})
+            }
 
             res.send(card)
         } catch (error) {
@@ -61,6 +65,10 @@ export class CardController{
 
         try {
             const updatedCard=await CardsService.updateCard(id,req.body)
+
+            if (!updatedCard){
+                return res.status(404).send({message:`card not found!`})
+            }
 
             res.send(updatedCard)
         } catch (error) {

@@ -49,10 +49,12 @@ export const checkIsAdmin= async (req,res,next)=>{
 
 export const checkIsUserOrAdmin= async (req,res,next)=>{
     const token =req.headers.authorization
+    
 
     if (!token) {
        return res.status(401).send({message:`User is not authorized`})
     }
+
  
     const user=decodeToken(token)
 

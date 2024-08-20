@@ -9,7 +9,7 @@ export class UserController{
 
             res.send(allUsers)
         } catch (error) {
-            res.status(404).send({message:error})
+            res.status(404).send({message:error.message})
         }
     }
 
@@ -18,9 +18,13 @@ export class UserController{
         try {
             const user= await UserServices.getUserById(id)
 
+            if (!user){
+                return res.status(404).send({message:`user not found!`})
+            }
+
             res.send(user)
         } catch (error) {
-            res.status(404).send({message:error})
+            res.status(404).send({message:error.message})
         }
     }
 
@@ -38,7 +42,7 @@ export class UserController{
             
             res.send(newUser)
         } catch (error) {
-            res.status(400).send({message:error})
+            res.status(400).send({message:error.message})
         }
     }
 
@@ -48,23 +52,29 @@ export class UserController{
         try {
             const updatedUser = await UserServices.updateUser(id, newUser)
             if (!updatedUser) {
-                return res.status(404).send({message:`cant find user with ${id}`})
+                return res.status(404).send({message:`user not found!`})
             }
 
             res.send(updatedUser)
         } catch (error) {
-            res.status(400).send({message:error})
+            res.status(400).send({message:error.message})
         }
     }
 
     static async changeBusinessStatus(req,res){
         const {id}=req.params;
         try {
-            const updatedUser = await UserServices.changeUserBusinessStatus(id)
+            const updatedUser = await UserServices.changeUserBusinessStatus(id)            
 
+            if (!updatedUser){
+                return res.status(404).send({message:`user not found!`})
+            }
+            
             res.send(updatedUser)
         } catch (error) {
-            res.status(404).send({message:error})
+            console.log(error);
+
+            res.status(404).send({message:error.message})
         }
     }
 
@@ -73,9 +83,13 @@ export class UserController{
         try {
             const deletedUser = await UserServices.deleteUser(id)
 
+            if (!deletedUser) {
+                res.status(404).send({message:`user not found!`})
+            }
+
             res.send(deletedUser)
         } catch (error) {
-            res.status(404).send({message:error})
+            res.status(404).send({message:error.message})
         }
     }
 
@@ -97,7 +111,7 @@ export class UserController{
 
             res.send(token)
         } catch (error) {
-            res.status(400).send({message:error})
+            res.status(400).send({message:error.message})
         }
     }
 
@@ -113,7 +127,7 @@ export class UserController{
             
             res.send(user)
         } catch (error) {
-            res.status(400).send({message:error})
+            res.status(400).send({message:error.message})
         }
     }
 }

@@ -46,6 +46,11 @@ export class UserServices{
     static async changeUserBusinessStatus(id){
         try {
             const user=await UserModel.findById(id)
+
+            if(!user){
+                return null
+            }
+
             if (!user.isBusiness && !user.bizNumber) {
                 user.bizNumber=generateBizNumber()
             }
@@ -56,6 +61,7 @@ export class UserServices{
             
             return updatedUser
         } catch (error) {
+
             throw error
         }
     }
