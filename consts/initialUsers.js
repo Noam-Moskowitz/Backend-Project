@@ -1,3 +1,5 @@
+import { generateBizNumber } from "../utils/userUtils.js";
+
 export const initialUsers = [
   {
     name: {
@@ -44,6 +46,7 @@ export const initialUsers = [
     },
     isAdmin: false,
     isBusiness: true,
+    bizNumber:generateBizNumber()
   },
   {
     name: {

@@ -93,7 +93,8 @@ const userSchema= new Schema({
     },
     createdAt:{
         type:String,
-        required:true
+        required:true,
+        default:new Date()
     }
 })
 

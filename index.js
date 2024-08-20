@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import chalk from 'chalk';
 import moment from 'moment';
 import { colorMethod } from './utils/chalkUtils.js';
+import { setInitialData } from './initialDataService.js';
 
 
 dotenv.config()
@@ -23,6 +24,8 @@ main().catch(err=>console.log(err))
 const app = express()
 
 app.use(express.json())
+
+setInitialData()
 
 app.use(morgan((tokens, req, res) => {
     const status = tokens.status(req, res);
@@ -53,6 +56,7 @@ app.use(`/`,appRoutes)
 app.get(`/`, (req, res) => {
     res.send(`welcome`)
 })
+
 
 app.get(`*`,(req,res)=>{
      res.writeHead(404, { 'Content-Type': 'text/html' });

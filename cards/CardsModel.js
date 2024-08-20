@@ -4,8 +4,7 @@ import { Schema , SchemaType, model} from "mongoose";
 const imageSchema = new Schema({
     url: {
         type: String,
-        required: true,
-        minlength: 7
+        required: false,
     },
     alt: {
         type: String,
@@ -96,7 +95,8 @@ const cardSchema = new Schema({
     },
     createdAt:{
         type:String,
-        required:true
+        required:true,
+        default:new Date()
     }
 })
 
