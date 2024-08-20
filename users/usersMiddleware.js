@@ -9,7 +9,7 @@ export const checkCredentials=async (req,res,next)=>{
 
     
             if (!user || !await bcrypt.compare(password, user.password)) {
-                res.status(403).send({message:`email or password is incorrect!`})
+                res.status(401).send({message:`email or password is incorrect!`})
             }else{
                 next()
             }  
@@ -101,11 +101,11 @@ export const validateUser= async(req,res,next)=>{
     const existingEmail = await UserModel.findOne({email:req.body.email})
 
     if (existingEmail) {
-        return res.status(403).send({message:`email already in use!`})
+        return res.status(400).send({message:`email already in use!`})
     }
 
     if (error) {
-        return res.status(403).send({message:error})
+        return res.status(400).send({message:error})
     }
 
     
@@ -117,7 +117,7 @@ export const validateUpdatedUser= async(req,res,next)=>{
     const {error}=userValidation.validate(req.body)
 
     if (error) {
-        return res.status(403).send({message:error})
+        return res.status(400).send({message:error})
     }
 
     next()

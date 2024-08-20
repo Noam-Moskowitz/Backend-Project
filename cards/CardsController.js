@@ -51,7 +51,7 @@ export class CardController{
 
             res.send(newCard)
         } catch (error) {
-            res.status(404).send({message:error})
+            res.status(400).send({message:error})
         }
 
     }
@@ -64,7 +64,7 @@ export class CardController{
 
             res.send(updatedCard)
         } catch (error) {
-            res.status(404).send({message:error})
+            res.status(400).send({message:error})
         }
     }
 

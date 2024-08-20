@@ -6,7 +6,7 @@ export const validateCard=(req,res,next)=>{
     const {error}=cardValidationSchema.validate(card);
 
     if (error) {
-        return   res.status(401).send(error)
+        return   res.status(400).send(error)
     }
 
     next()

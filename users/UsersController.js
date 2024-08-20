@@ -9,7 +9,7 @@ export class UserController{
 
             res.send(allUsers)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(404).send({message:error})
         }
     }
 
@@ -20,7 +20,7 @@ export class UserController{
 
             res.send(user)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(404).send({message:error})
         }
     }
 
@@ -38,7 +38,7 @@ export class UserController{
             
             res.send(newUser)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(400).send({message:error})
         }
     }
 
@@ -48,12 +48,12 @@ export class UserController{
         try {
             const updatedUser = await UserServices.updateUser(id, newUser)
             if (!updatedUser) {
-                return res.status(401).send({message:`cant find user with ${id}`})
+                return res.status(404).send({message:`cant find user with ${id}`})
             }
 
             res.send(updatedUser)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(400).send({message:error})
         }
     }
 
@@ -64,7 +64,7 @@ export class UserController{
 
             res.send(updatedUser)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(404).send({message:error})
         }
     }
 
@@ -75,7 +75,7 @@ export class UserController{
 
             res.send(deletedUser)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(404).send({message:error})
         }
     }
 
@@ -97,7 +97,7 @@ export class UserController{
 
             res.send(token)
         } catch (error) {
-            res.status(401).send({message:error})
+            res.status(400).send({message:error})
         }
     }
 }
