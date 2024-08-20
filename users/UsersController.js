@@ -110,7 +110,6 @@ export class UserController{
             if (!user) {
                 return res.status(404).send({message:`could not find user!`})
             }
-            console.log(user);
             
             res.send(user)
         } catch (error) {
