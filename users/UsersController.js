@@ -100,4 +100,21 @@ export class UserController{
             res.status(400).send({message:error})
         }
     }
+
+    static async changeBizNumber(req,res){
+        const {id}=req.params;
+        const {bizNumber}=req.body;
+
+        try {
+            const user=await UserServices.changeBizNumber(bizNumber,id)
+            if (!user) {
+                return res.status(404).send({message:`could not find user!`})
+            }
+            console.log(user);
+            
+            res.send(user)
+        } catch (error) {
+            res.status(400).send({message:error})
+        }
+    }
 }

@@ -84,4 +84,18 @@ export class UserServices{
             throw error
         }
     }
+
+    static async changeBizNumber(newBizNumber,id){
+        try {
+            const user=await UserModel.findByIdAndUpdate(
+                id,
+                {bizNumber:newBizNumber},
+                { new: true}
+            )
+
+            return user
+        } catch (error) {
+            throw error
+        }
+    }
 }

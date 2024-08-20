@@ -108,9 +108,7 @@ export const validateUser= async(req,res,next)=>{
         return res.status(400).send({message:error})
     }
 
-    
     next()
-    
 }
 
 export const validateUpdatedUser= async(req,res,next)=>{
@@ -118,6 +116,21 @@ export const validateUpdatedUser= async(req,res,next)=>{
 
     if (error) {
         return res.status(400).send({message:error})
+    }
+
+    next()
+    
+}
+
+export const checkBizNumber= async(req,res,next)=>{
+    const {bizNumber}=req.body
+
+    if (!bizNumber) return res.status(400).send({message:`bizNumber is required!`})
+
+    const bizNumberExists=await UserModel.findOne({bizNumber:bizNumber})
+
+    if (bizNumberExists) {
+        return res.status(400).send({message:`bizNumber already in use!`})
     }
 
     next()
