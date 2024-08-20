@@ -16,7 +16,6 @@ const PORT=process.env.PORT
 async function main(){
     await mongoose.connect(process.env.MONGO_DB_URL)
     console.log(`mongo connected on port 27017`);
-    
 }
 
 main().catch(err=>console.log(err))
@@ -38,7 +37,6 @@ app.use(morgan((tokens, req, res) => {
 }));
 
 app.use(express.static("public"));
-
 
 app.use(cors({
     origin: true,
