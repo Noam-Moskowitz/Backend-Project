@@ -16,7 +16,7 @@ const PORT=process.env.PORT
 
 async function main(){
     await mongoose.connect(process.env.MONGO_DB_URL)
-    console.log(`mongo connected on port 27017`);
+    console.log(chalk.blue(`mongo connected on port 27017`));
 }
 
 main().catch(err=>console.log(err))
@@ -49,7 +49,7 @@ app.use(cors({
 }))
 
 app.listen(PORT, () => {
-    console.log(`listeing on port ${PORT}`);
+    console.log(chalk.blue(`listeing on port ${PORT}`));
 })
 app.use(`/`,appRoutes)
 

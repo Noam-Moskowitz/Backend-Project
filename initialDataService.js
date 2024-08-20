@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { CardModel } from "./cards/CardsModel.js";
 import { initialCards } from "./consts/initialCards.js";
 import { initialUsers } from "./consts/initialUsers.js";
@@ -35,6 +36,9 @@ export const setInitialData=async ()=>{
         
         await card.save()
     }
+
+    console.log(chalk.bgBlueBright(`Initial Data Created Succesfully`));
+    
     
 };
 
