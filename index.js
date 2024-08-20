@@ -37,6 +37,8 @@ app.use(morgan((tokens, req, res) => {
     ].join(' ')
 }));
 
+app.use(express.static("public"));
+
 
 app.use(cors({
     origin: true,
@@ -53,3 +55,19 @@ app.use(`/`,appRoutes)
 app.get(`/`, (req, res) => {
     res.send(`welcome`)
 })
+
+app.get(`*`,(req,res)=>{
+     res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.write(`<meta charset="UTF-8">`);
+        res.write(`
+            <style>
+                * {
+                    text-align: center;
+                    color: red;
+                }
+            </style>
+        `);
+        res.write("<h1>ERROR 404</h1>");
+        res.write("<h2>The route you are trying to reach does not exist!</h2>");
+        res.end();
+    });
