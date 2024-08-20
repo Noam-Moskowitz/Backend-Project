@@ -21,7 +21,8 @@ export const initialUsers = [
       zip: "90001"
     },
     isAdmin: true,
-    isBusiness: false,
+    isBusiness: true,
+    bizNumber:generateBizNumber()
   },
   {
     name: {

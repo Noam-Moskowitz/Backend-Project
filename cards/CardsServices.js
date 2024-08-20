@@ -70,7 +70,7 @@ export class CardsService{
 
         card.likes=likesArray;
 
-        const newCard=await CardModel.findByIdAndUpdate(cardId, card);
+        const newCard=await CardModel.findByIdAndUpdate(cardId, card,{new:true});
         
         return newCard
 

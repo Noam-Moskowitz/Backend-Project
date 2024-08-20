@@ -132,5 +132,4 @@ export const userValidation=Joi.object({
     password:Joi.string().regex(passwordRegex),
     image:userImageValidation,
     address:userAddressValidation,
-    isBusiness:Joi.boolean().required()
 })

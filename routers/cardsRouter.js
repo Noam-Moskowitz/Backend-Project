@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get(`/`, CardController.getAllCards)
 
-router.get(`/my-cards`,CardController.getCardsByUser)
+router.get(`/my-cards`,validateToken ,CardController.getCardsByUser)
 
 router.get(`/:id`, CardController.getCardById)
 
