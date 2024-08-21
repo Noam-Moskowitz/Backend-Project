@@ -1,5 +1,4 @@
 import express from 'express'
-import mongoose from 'mongoose';
 import cors from 'cors'
 import appRoutes from './routers/mainRouter.js'
 import dotenv from 'dotenv'
@@ -8,18 +7,19 @@ import chalk from 'chalk';
 import moment from 'moment';
 import { colorMethod } from './utils/chalkUtils.js';
 import { setInitialData } from './initialDataService.js';
+import { connect } from './utils/envUtils.js';
 
 
 dotenv.config()
 
 const PORT=process.env.PORT
 
-async function main(){
+/* async function main(){
     await mongoose.connect(process.env.MONGO_DB_URL)
     console.log(chalk.blue(`mongo connected on port 27017`));
-}
+} */
 
-main().catch(err=>console.log(err))
+connect().catch(err=>console.log(err))
 
 const app = express()
 
