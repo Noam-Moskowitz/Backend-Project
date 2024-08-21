@@ -1,7 +1,8 @@
 import express from 'express'
 import { validateCard } from '../cards/cardsMiddleware.js'
 import { CardController } from '../cards/CardsController.js'
-import { checkIsBusinessOrAdmin, checkIsUserOrAdmin, validateToken } from '../users/usersMiddleware.js'
+import { checkIsBusinessOrAdmin, checkIsUserOrAdmin } from '../users/usersMiddleware.js'
+import { validateToken } from '../token/tokenMiddleware.js'
 
 const router = express.Router()
 

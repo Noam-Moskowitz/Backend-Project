@@ -1,12 +1,13 @@
 import express from 'express'
 import { UserController } from '../users/UsersController.js'
-import { checkBizNumber, checkCredentials, checkIsAdmin, checkIsUserOrAdmin, validateToken, validateUpdatedUser, validateUser } from '../users/usersMiddleware.js'
+import { checkBizNumber,  checkIsAdmin, checkIsUserOrAdmin, validateUpdatedUser, validateUser } from '../users/usersMiddleware.js'
+import { validateToken } from '../token/tokenMiddleware.js'
 
 const router = express.Router()
 
 router.get(`/`,checkIsAdmin, UserController.getAllUsers)
 
-router.get(`/:id`, checkIsUserOrAdmin, UserController.getUserById)
+router.get(`/:id`,checkIsUserOrAdmin, UserController.getUserById)
 
 router.post(`/`,validateUser, UserController.addUser)
 
@@ -15,8 +16,6 @@ router.put(`/:id`,validateToken,checkIsUserOrAdmin, validateUpdatedUser, UserCon
 router.patch(`/:id`,checkIsUserOrAdmin, UserController.changeBusinessStatus)
 
 router.delete(`/:id`,checkIsUserOrAdmin, UserController.deleteUser)
-
-router.post(`/login`,checkCredentials, UserController.loginUser)
 
 router.patch(`/bizNumber/:id`,checkIsAdmin,checkBizNumber, UserController.changeBizNumber)
 

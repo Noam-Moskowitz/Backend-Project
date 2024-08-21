@@ -1,6 +1,7 @@
 import { UserModel, userValidation } from "./UsersModel.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { decodeToken } from "../token/tokenMiddleware.js";
 
 export const checkCredentials=async (req,res,next)=>{
     const {email,password}=req.body;
@@ -65,36 +66,6 @@ export const checkIsUserOrAdmin= async (req,res,next)=>{
     }else{
         res.status(401).send({message:`User is not authorized`})
     }
-}
-
-export const validateToken=(req,res,next)=>{
-    const user=decodeToken(req.headers.authorization)
-    if (!user) {        
-        return res.status(401).send({message:`User is not authorized`})
-    }
-
-    const dateToCompare = new Date(user.exp * 1000);
-
-    const newDate = new Date(); 
-
-    const isExpired = newDate > dateToCompare;
-
-    if (isExpired) {
-        return res.status(401).send({message:`User is not authorized`})
-    }
-    next()
-    
-}
-
-
-const decodeToken=(token)=>{
-    const decodedToken= jwt.decode(token, process.env.JWT_SECRET)
-
-    if (!decodedToken) {
-        return null
-    }
-
-    return decodedToken
 }
 
 export const validateUser= async(req,res,next)=>{
