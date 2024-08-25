@@ -5,7 +5,7 @@ import { UserModel } from "./UsersModel.js";
 export class UserServices{
     static async getAllUsers(){
         try {
-            const allUsers= await UserModel.find()
+            const allUsers= await UserModel.find({},{password:0})
 
             return allUsers
         } catch (error) {
@@ -15,7 +15,7 @@ export class UserServices{
 
     static async getUserById(id){
         try {
-            const user= await UserModel.findById(id)
+            const user= await UserModel.findById(id).select(`-password`)
 
             return user
         } catch (error) {
@@ -26,7 +26,7 @@ export class UserServices{
     static async addUser(user){
         try {
             const newUser=await UserModel.create(user);
-            
+
             return newUser
         } catch (error) {
             throw error
@@ -35,7 +35,7 @@ export class UserServices{
 
     static async updateUser(id, newUser){
         try {
-            const updatedUser = await UserModel.findByIdAndUpdate(id, newUser, { new: true });
+            const updatedUser = await UserModel.findByIdAndUpdate(id, newUser, { new: true }).select(`-password`);
             
             return updatedUser
         } catch (error) {
@@ -57,7 +57,7 @@ export class UserServices{
 
             user.isBusiness=!user.isBusiness
 
-            const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true });
+            const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true }).select(`-password`);
             
             return updatedUser
         } catch (error) {
@@ -68,7 +68,7 @@ export class UserServices{
 
     static async deleteUser(id){
         try {
-            const deletedUser=await UserModel.findByIdAndDelete(id)
+            const deletedUser=await UserModel.findByIdAndDelete(id).select(`-password`)
 
             return deletedUser
         } catch (error) {
