@@ -96,12 +96,13 @@ The project is organized into the following structure:
    npm install
    ```
 
-
-4. Start the server:
+3. Start the server:
    ```bash
    npm start
    ```
 
+4. View the API documentation:
+   [Postman Documentation](https://documenter.getpostman.com/view/36795401/2sAXjQ3WYU)
 
 ---
 
@@ -116,4 +117,4 @@ The project is organized into the following structure:
 
 This project provides a full backend service for managing users and cards, equipped with secure JWT-based authorization, logging with Morgan, and proper validation using Joi. It’s structured to be scalable and maintainable, making it suitable for both development and production environments.
 
---- 
+---
